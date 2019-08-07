@@ -22,7 +22,7 @@ namespace ServiceBusSender
 
             await SendMessages(_sender, 10);
              
-            Console.ReadKey();
+            // Console.ReadKey();
 
             await _sender.CloseAsync();
 
