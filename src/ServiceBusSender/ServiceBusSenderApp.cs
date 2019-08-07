@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ServiceBusSender
 {
-    public class ServiceBusSenderApp
+    internal class ServiceBusSenderApp
     {
         private readonly ILogger _logger;
         private readonly IMessageSender _sender;
