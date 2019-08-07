@@ -20,17 +20,14 @@ namespace ServiceBusSender
         {
             _logger.LogInformation($"BEGIN - {nameof(ServiceBusSenderApp)} starting");
 
-            await SendMessages(_sender, 10);
-             
-            // Console.ReadKey();
-
-            await _sender.CloseAsync();
+            await SendMessagesAndCloseAsync(_sender, 10);
 
             _logger.LogInformation($"END - {nameof(ServiceBusSenderApp)} finished");
         }
 
-        public async Task SendMessages(IMessageSender messageSender, int numberOfMessagesToSend)
+        public async Task SendMessagesAndCloseAsync(IMessageSender messageSender, int numberOfMessagesToSend)
         {
+            // Send
             try
             {
                 _logger.LogInformation($"attempting to send {numberOfMessagesToSend} messages to the queue");
@@ -44,6 +41,9 @@ namespace ServiceBusSender
             {
                 _logger.LogError(ex, "error attempting to send messages to queue");
             }
+
+            // Close
+            await messageSender.CloseAsync();
         }
     }
 }
