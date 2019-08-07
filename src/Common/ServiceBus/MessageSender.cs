@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Microsoft.Azure.ServiceBus;
+using Microsoft.Extensions.Logging;
 
-namespace ServiceBusSender.ServiceBus
+namespace Common.ServiceBus
 {
     public class MessageSender : IMessageSender, IDisposable
     {

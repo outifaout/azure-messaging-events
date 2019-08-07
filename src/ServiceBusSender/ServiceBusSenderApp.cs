@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Common.ServiceBus;
 using Microsoft.Extensions.Logging;
-using ServiceBusSender.ServiceBus;
 
 namespace ServiceBusSender
 {

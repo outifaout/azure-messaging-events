@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace ServiceBusSender.ServiceBus
+namespace Common.ServiceBus
 {
     public class QueueClientFactory : IClientFactory
     {

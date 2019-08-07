@@ -1,4 +1,4 @@
-﻿namespace ServiceBusSender.ServiceBus
+﻿namespace Common.ServiceBus
 {
     public class MessageSenderSettings
     {

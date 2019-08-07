@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.ServiceBus;
 
-namespace ServiceBusSender.ServiceBus
+namespace Common.ServiceBus
 {
     public interface IClientFactory
     {

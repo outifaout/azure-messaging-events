@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBusSender", "ServiceBusSender.csproj", "{BB6FA644-1A4F-4BE3-A712-8C43EC023F7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBusSender", "ServiceBusSender.csproj", "{BB6FA644-1A4F-4BE3-A712-8C43EC023F7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{27399E81-52B7-45F1-88C5-82DA01D9CE0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BB6FA644-1A4F-4BE3-A712-8C43EC023F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB6FA644-1A4F-4BE3-A712-8C43EC023F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB6FA644-1A4F-4BE3-A712-8C43EC023F7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27399E81-52B7-45F1-88C5-82DA01D9CE0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27399E81-52B7-45F1-88C5-82DA01D9CE0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27399E81-52B7-45F1-88C5-82DA01D9CE0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27399E81-52B7-45F1-88C5-82DA01D9CE0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

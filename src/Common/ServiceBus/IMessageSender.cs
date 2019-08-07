@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ServiceBusSender.ServiceBus
+namespace Common.ServiceBus
 {
     public interface IMessageSender
     {
