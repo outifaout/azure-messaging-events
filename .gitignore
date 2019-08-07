@@ -331,3 +331,6 @@ ASALocalRun/
 
 # vscode files to ignore
 **/.vscode/launch.json
+
+# any local settings files
+**/appsettings.local.json
