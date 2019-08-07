@@ -18,7 +18,10 @@ namespace ServiceBusSender
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
             // create the app and run
-            serviceProvider.GetService<ServiceBusSenderApp>().Run();
+            var app = serviceProvider.GetService<ServiceBusSenderApp>();
+
+            // run
+            app.RunAsync().GetAwaiter().GetResult();
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
@@ -46,6 +49,7 @@ namespace ServiceBusSender
 
             // add services
             serviceCollection.AddTransient<IMessageSender, MessageSender>();
+            serviceCollection.AddSingleton<IClientFactory, QueueClientFactory>();
 
             // add the application
             serviceCollection.AddTransient<ServiceBusSenderApp>();

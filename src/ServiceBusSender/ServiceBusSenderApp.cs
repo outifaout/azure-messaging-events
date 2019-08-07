@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using ServiceBusSender.ServiceBus;
 
@@ -9,19 +10,40 @@ namespace ServiceBusSender
         private readonly ILogger _logger;
         private readonly IMessageSender _sender;
 
-        public ServiceBusSenderApp(ILogger<ServiceBusSenderApp> logger, IMessageSender sender)
+        public ServiceBusSenderApp(IMessageSender sender, ILogger<ServiceBusSenderApp> logger)
         {
             _logger = logger;
             _sender = sender;
         }
 
-        public void Run()
+        public async Task RunAsync()
         {
-            _logger.LogInformation($"Run console application {nameof(ServiceBusSenderApp)}");
+            _logger.LogInformation($"BEGIN - {nameof(ServiceBusSenderApp)} starting");
 
-            _logger.LogInformation("End Run");
-
+            await SendMessages(_sender, 10);
+             
             Console.ReadKey();
+
+            await _sender.CloseAsync();
+
+            _logger.LogInformation($"END - {nameof(ServiceBusSenderApp)} finished");
+        }
+
+        public async Task SendMessages(IMessageSender messageSender, int numberOfMessagesToSend)
+        {
+            try
+            {
+                _logger.LogInformation($"attempting to send {numberOfMessagesToSend} messages to the queue");
+                for (var i = 0; i < numberOfMessagesToSend; i++)
+                {
+                    await messageSender.SendMessageAsync($"Message {i}");
+                }
+                _logger.LogInformation($"{numberOfMessagesToSend} messages sent to queue");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "error attempting to send messages to queue");
+            }
         }
     }
 }

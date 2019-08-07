@@ -4,6 +4,7 @@ namespace ServiceBusSender.ServiceBus
 {
     public interface IMessageSender
     {
-        Task SendMessageAsync(string message);
+        Task SendMessageAsync(string messageBody);
+        Task CloseAsync();
     }
 }
