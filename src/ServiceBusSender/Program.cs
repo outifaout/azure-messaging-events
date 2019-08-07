@@ -1,4 +1,8 @@
-﻿using System;
+﻿using System.IO;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using ServiceBusSender.ServiceBus;
 
 namespace ServiceBusSender
 {
@@ -6,7 +10,45 @@ namespace ServiceBusSender
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // create a new service collection
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+
+            // create a service provider
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            // create the app and run
+            serviceProvider.GetService<ServiceBusSenderApp>().Run();
+        }
+
+        private static void ConfigureServices(IServiceCollection serviceCollection)
+        {  
+            // build configuration
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("appsettings.local.json", true)
+                .AddUserSecrets<Program>()
+                .AddEnvironmentVariables()
+                .Build();
+
+            // add logging
+            serviceCollection.AddLogging((logging) =>
+            {
+                logging.AddConfiguration(config.GetSection("Logging"));
+                logging.AddConsole();
+                logging.AddDebug();
+            });
+
+            // add options
+            serviceCollection.AddOptions();
+            serviceCollection.Configure<MessageSenderSettings>(config.GetSection("ServiceBusSettings"));
+
+            // add services
+            serviceCollection.AddTransient<IMessageSender, MessageSender>();
+
+            // add the application
+            serviceCollection.AddTransient<ServiceBusSenderApp>();
         }
     }
 }
