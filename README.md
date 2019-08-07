@@ -28,7 +28,7 @@ This example shows how to send messages to a Service Bus queue. To work through 
     ```
 
 5. Go to [ServiceBusSender](src/ServiceBusSender) directory and find the [appsettings.json](src/ServiceBusSender/appsettings.json) file
-6. In appsettings.json find the `ServiceBusSettings` section and update the entry `ConnectionString` specifying the connection string that was output from the script execution in previous steps. NOTE: Do not check this into source control, alternatively you can use an appsettings.local.json file or local secrets to not put in appsettings.json.
+6. In appsettings.json find the `ServiceBusSettings` section and update the values for `ServiceBusNamespace` and `SharedAccessKey` specifying the values from the connection string that was output from the script execution in previous steps. **NOTE**: Do not check this into source control, alternatively you can use an appsettings.local.json file or local secrets to not put in appsettings.json. Alternatively we could have used the full connection string but I prefer to split this up.
 7. Additionally, if you changed the `queueName` in the Variables of the provisioning script you will need to update the `QueueName` setting in the `ServiceBusSettings` section of appsettings.json file as well.
 8. Rebuild the Solution
 9. Run the `ServiceBusSender` console application using Visual Studio
