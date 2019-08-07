@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Client;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 

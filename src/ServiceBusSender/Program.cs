@@ -1,5 +1,7 @@
 ﻿using System.IO;
+using Common.Client;
 using Common.ServiceBus;
+using Common.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,7 +33,6 @@ namespace ServiceBusSender
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", true, true)
                 .AddJsonFile("appsettings.local.json", true)
-                .AddUserSecrets<Program>()
                 .AddEnvironmentVariables()
                 .Build();
 

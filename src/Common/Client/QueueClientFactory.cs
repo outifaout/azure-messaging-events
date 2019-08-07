@@ -1,8 +1,9 @@
-﻿using Microsoft.Azure.ServiceBus;
+﻿using Common.Settings;
+using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Common.ServiceBus
+namespace Common.Client
 {
     public class QueueClientFactory : IClientFactory
     {

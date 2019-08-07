@@ -1,6 +1,7 @@
-﻿using Microsoft.Azure.ServiceBus;
+﻿using Common.Settings;
+using Microsoft.Azure.ServiceBus;
 
-namespace Common.ServiceBus
+namespace Common.Client
 {
     public interface IClientFactory
     {
