@@ -1,31 +1,22 @@
 #!/bin/bash
 
-# Creates a ServiceBus namespace and a Queue
-# Requires connection to be established
-# i.e. az login
+# Creates a Service Bus namespace and a Queue
 
 # Variables
 location=eastus
 nameSuffix=$RANDOM
-resourceGroupName=az-mssg-evt-demo-rg-$nameSuffix
-serviceBusNamespace=servicebus$nameSuffix
-serviceBusQueueName=queue1
+resourceGroupName=service-bus-rg-$nameSuffix
+namespaceName=serviceBusNamespace$nameSuffix
+queueName=queue1
 
 # Create a Resource Group
-az group create \
-  --name $resourceGroupName \
-  --location $location \
-  --tags 
+az group create --name $resourceGroupName --location $location
 
-# Create a ServiceBus namespace
-az servicebus namespace create \
-  --name $serviceBusNamespace \
-  --resource-group $resourceGroupName \
-  --location $location \
-  --sku Basic
+# Create a Service Bus messaging namespace
+az servicebus namespace create --name $namespaceName --resource-group $resourceGroupName --location $location --sku Basic
 
-# Create a ServiceBus Queue
-az servicebus queue create \
-  --resource-group $resourceGroupName \
-  --namespace-name $serviceBusNamespace \
-  --name $serviceBusQueueName
+# Create a Service Bus Queue
+az servicebus queue create --name $queueName --namespace-name $namespaceName --resource-group $resourceGroupName
+
+# Get the connection string for the namespace
+connectionString=$(az servicebus namespace authorization-rule keys list --resource-group $resourceGroupName --namespace-name $namespaceName --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
