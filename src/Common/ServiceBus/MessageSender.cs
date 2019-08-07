@@ -46,7 +46,7 @@ namespace Common.ServiceBus
 
         public void Dispose()
         {
-            CloseAsync().Wait();
+            CloseAsync().GetAwaiter().GetResult();
         }
     }
 }
