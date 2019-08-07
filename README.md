@@ -2,6 +2,15 @@
 
 Sample repository for demonstrating messaging and events using azure services such as Azure Service Bus, Event Grid, and more.
 
+## Other areas to look for
+
+In addition to Azure messaging and events these examples also illustrate use of:
+
+* Configuration
+* Logging
+* Dependency Injection
+* .NET Core Console Application
+
 ## Note about Scripts
 
 There are various provisioning scripts available as part of this repository that will help provision any Azure resources. You can execute these scripts either using [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview?view=azure-cli-latest) or [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) if you have it installed directly on your machine.
