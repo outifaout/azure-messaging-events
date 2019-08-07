@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Creates a ServiceBus namespace and a Queue
+# Requires connection to be established
+# i.e. az login
+
+# Variables
+location=eastus
+nameSuffix=$RANDOM
+resourceGroupName=az-mssg-evt-demo-rg-$nameSuffix
+serviceBusNamespace=servicebus$nameSuffix
+serviceBusQueueName=queue1
+
+# Create a Resource Group
+az group create \
+  --name $resourceGroupName \
+  --location $location \
+  --tags 
+
+# Create a ServiceBus namespace
+az servicebus namespace create \
+  --name $serviceBusNamespace \
+  --resource-group $resourceGroupName \
+  --location $location \
+  --sku Basic
+
+# Create a ServiceBus Queue
+az servicebus queue create \
+  --resource-group $resourceGroupName \
+  --namespace-name $serviceBusNamespace \
+  --name $serviceBusQueueName
