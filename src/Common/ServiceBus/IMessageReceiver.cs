@@ -4,6 +4,7 @@ namespace Common.ServiceBus
 {
     public interface IMessageReceiver
     {
+        void ReceiveMessages();
         Task CloseAsync();
     }
 }

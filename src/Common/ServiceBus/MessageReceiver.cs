@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Common.Client;
 using Microsoft.Azure.ServiceBus;
@@ -17,6 +19,33 @@ namespace Common.ServiceBus
         {
             _factory = factory;
             _logger = logger;
+        }
+
+        public void ReceiveMessages()
+        {
+            var messageHandlerOptions = 
+                new MessageHandlerOptions(ExceptionReceivedHandler)
+                {
+                    MaxConcurrentCalls = 1,
+                    AutoComplete = false
+                };
+
+            Client.RegisterMessageHandler(
+                ProcessMessageHandlerAsync,
+                messageHandlerOptions);
+        }
+
+        private async Task ProcessMessageHandlerAsync(Message message, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation($"Received message: SequenceNumber: {message.SystemProperties.SequenceNumber}, Body: {Encoding.UTF8.GetString(message.Body)}");
+            await Client.CompleteAsync(message.SystemProperties.LockToken);
+        }
+
+        private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceived)
+        {
+            var context = exceptionReceived.ExceptionReceivedContext;
+            _logger.LogError(exceptionReceived.Exception, $"Exception occurred - Endpoint: {context.Endpoint}, EntityPath: {context.EntityPath}, Action: {context.Action}");
+            return Task.CompletedTask;
         }
 
         public async Task CloseAsync()

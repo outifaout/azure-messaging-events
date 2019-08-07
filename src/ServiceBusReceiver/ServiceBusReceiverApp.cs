@@ -19,14 +19,14 @@ namespace ServiceBusReceiver
         {
             _logger.LogInformation($"BEGIN - {nameof(ServiceBusReceiverApp)} starting");
 
-            await ReceiveMessagesAndCloseAsync(_receiver);
+            _receiver.ReceiveMessages();
+
+            Console.ReadKey();
+
+            await _receiver.CloseAsync();
 
             _logger.LogInformation($"END - {nameof(ServiceBusReceiverApp)} finished");
         }
 
-        public Task ReceiveMessagesAndCloseAsync(IMessageReceiver messageReceiver)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
